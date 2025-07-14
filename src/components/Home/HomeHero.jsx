@@ -1,0 +1,134 @@
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
+const HeroSection = () => {
+  const [slides, setSlides] = useState([
+    {
+      image:
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1950&q=80",
+      title: "Welcome to Hotel Aashirwad",
+      subtitle: "Luxury & Comfort in the Heart of Pokhara",
+    },
+    {
+      image:
+        "https://images.unsplash.com/photo-1600047500633-0143cdad85c0?auto=format&fit=crop&w=1950&q=80",
+      title: "Elegant Rooms & Serene Views",
+      subtitle: "Experience premium hospitality like never before",
+    },
+    {
+      image:
+        "https://images.unsplash.com/photo-1551776235-dde6d4829808?auto=format&fit=crop&w=1950&q=80",
+      title: "Unforgettable Stay",
+      subtitle: "Book now and enjoy exclusive deals",
+    },
+  ]);
+
+  return (
+    <section className="relative w-full h-screen overflow-hidden">
+      <Swiper
+        modules={[Autoplay, Navigation]}
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        navigation={{
+          prevEl: ".custom-swiper-prev",
+          nextEl: ".custom-swiper-next",
+        }}
+        loop={true}
+        className="w-full h-full"
+        speed={800}
+      >
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <div
+              className="w-full h-screen bg-cover bg-center relative flex items-center justify-center"
+              style={{ backgroundImage: `url(${slide.image})` }}
+            >
+              <div className="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+              <div className="relative z-20 flex flex-col items-center justify-center h-full px-4 text-white text-center">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1 }}
+                >
+                  <h1 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg animate-pulse">
+                    {slide.title}
+                  </h1>
+                  <p className="text-lg md:text-2xl mb-8 drop-shadow-md animate-fadeIn">
+                    {slide.subtitle}
+                  </p>
+                </motion.div>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+
+        {/* Custom Navigation Buttons */}
+        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-30 cursor-pointer custom-swiper-prev bg-white bg-opacity-70 hover:bg-opacity-100 p-3 rounded-full shadow-md">
+          <FaChevronLeft className="text-xl text-[#1e2a54]" />
+        </div>
+        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 cursor-pointer custom-swiper-next bg-white bg-opacity-70 hover:bg-opacity-100 p-3 rounded-full shadow-md">
+          <FaChevronRight className="text-xl text-[#1e2a54]" />
+        </div>
+      </Swiper>
+
+      {/* Booking Form */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2 }}
+        className="absolute bottom-10 w-full flex justify-center px-4 z-50"
+      >
+        <form className="w-full md:w-5/6 max-w-6xl bg-white bg-opacity-95 backdrop-blur-lg text-gray-800 rounded-xl shadow-2xl grid grid-cols-1 md:grid-cols-5 gap-4 px-6 py-4">
+          <div className="flex flex-col">
+            <label className="text-xs font-semibold mb-1">CHECK-IN</label>
+            <input
+              type="date"
+              className="border border-gray-300 rounded px-2 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e2a54]"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="text-xs font-semibold mb-1">CHECK-OUT</label>
+            <input
+              type="date"
+              className="border border-gray-300 rounded px-2 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e2a54]"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="text-xs font-semibold mb-1">ADULTS</label>
+            <select className="border border-gray-300 rounded px-2 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e2a54]">
+              {[...Array(5)].map((_, i) => (
+                <option key={i} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-col">
+            <label className="text-xs font-semibold mb-1">CHILDREN</label>
+            <select className="border border-gray-300 rounded px-2 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e2a54]">
+              {[...Array(5)].map((_, i) => (
+                <option key={i} value={i}>
+                  {i}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex items-end">
+            <button
+              type="submit"
+              className="w-full bg-[#1e2a54] text-white font-semibold py-3 rounded hover:bg-[#F59E0B] transition-all shadow-md"
+            >
+              CHECK FOR AVAILABILITY
+            </button>
+          </div>
+        </form>
+      </motion.div>
+    </section>
+  );
+};
+
+export default HeroSection;
