@@ -1,135 +1,167 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import room from "../../assets/suite_room.png"
+import room from "../../assets/suite_room.png";
+
 const rooms = [
-  { id: 1, image: room, title: "Luxury Room", description: "Elegant interior, king-size bed and scenic balcony." },
-  { id: 2, image: room, title: "Family Suite", description: "Spacious room for families, play area and amenities." },
-  { id: 3, image: room, title: "Executive Suite", description: "Work and relax with business desk and premium service." },
-  { id: 4, image: room, title: "Disney House", description: "Fun, colorful theme room ideal for children and families." },
-  { id: 5, image: room, title: "Deluxe View", description: "Incredible mountain view with cozy interiors." },
+  {
+    id: 1,
+    image: room,
+    title: "Twin Room",
+    description:
+      "Experience comfort in our spacious Twin Room featuring two plush beds, breathtaking views of Pokhara’s lakeside, and modern finishes. Ideal for friends or colleagues traveling together, with cozy lighting to set the perfect ambiance after a day of adventure.",
+  },
+  {
+    id: 2,
+    image: room,
+    title: "Family Room",
+    description:
+      "Our Family Room offers a wide and welcoming space complete with a relaxing lounge area, mountain vistas through large windows, and an indoor play corner to keep your little ones entertained. ",
+  },
+  {
+    id: 3,
+    image: room,
+    title: "Suite Room",
+    description:
+      "Indulge in our premium Suite Room, designed for both relaxation and productivity. Featuring a private balcony, fully stocked minibar, king-size bed, and a dedicated workspace, it’s perfect for business travelers and luxury seekers alike.",
+  },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
     transition: {
-      staggerChildren: 0.15,
+      delay: i * 0.3,
+      duration: 0.8,
+      ease: "easeOut",
     },
-  },
+  }),
 };
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
+const textFadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { delay: 0.6, duration: 1 } },
 };
 
 const Accomodation = () => {
-  const [activeRoom, setActiveRoom] = useState(null);
   const navigate = useNavigate();
 
-  const handleToggle = (id) => {
-    setActiveRoom(activeRoom === id ? null : id);
-  };
-
   return (
-    <section className="bg-gradient-to-br from-white to-blue-50 py-20 px-6 md:px-12">
-      <div className="text-center mb-14">
-        <motion.h2
-          className="text-blue-500 text-sm font-semibold tracking-wide uppercase"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          Take Yourself
-        </motion.h2>
+    <section className="relative bg-gradient-to-br from-white via-blue-50 to-white py-24">
+      {/* Heading */}
+      <motion.div
+        className="text-center mb-20 px-6"
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+      >
+        <h2 className="text-sm font-semibold text-[#1e2a54] tracking-widest uppercase">
+          Experience Luxury
+        </h2>
         <motion.h1
-          className="text-4xl md:text-5xl font-extrabold text-gray-800 mt-2"
+          className="text-4xl md:text-5xl font-bold text-[#1e2a54] mt-2 leading-snug relative inline-block cursor-pointer"
           initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          whileHover={{ scale: 1.05 }}
         >
-          Special <span className="text-red-500">Rooms</span>
+          Signature{" "}
+          <span className="text-blue-900 underline decoration-blue-400 decoration-4 underline-offset-8 transition-all duration-300 hover:decoration-blue-900">
+            Accommodation
+          </span>
         </motion.h1>
         <motion.p
-          className="mt-4 text-gray-600 max-w-xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="mt-4 max-w-xl mx-auto text-gray-600 text-sm md:text-base"
+          variants={textFadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
         >
-          Discover the most exclusive rooms and suites that blend luxury and comfort.
+          Where comfort meets elegance, immerse yourself in rooms designed to impress.
         </motion.p>
-      </div>
+      </motion.div>
 
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        {rooms.map((room) => {
-          const isActive = activeRoom === room.id;
-          return (
+      {/* Room Cards */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 space-y-20">
+        {rooms.map((room, index) => (
+          <motion.div
+            key={room.id}
+            custom={index}
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className={`flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16 ${
+              index % 2 === 1 ? "lg:flex-row-reverse" : ""
+            } rounded-3xl  duration-1000`}
+          >
+            {/* Image Section */}
             <motion.div
-              key={room.id}
-              variants={cardVariants}
-              layout
-              transition={{ layout: { duration: 0.5, type: "spring" } }}
-              className={`rounded-xl overflow-hidden shadow-lg bg-white group relative cursor-pointer transform hover:scale-[1.015] hover:shadow-2xl transition duration-300`}
-              onClick={() => handleToggle(room.id)}
+              className="relative w-full lg:w-1/2 group overflow-hidden rounded-3xl shadow-xl"
+              whileHover={{ scale: 1.015 }}
+              transition={{ duration: 0.5 }}
             >
-              {/* Image Section */}
-              <motion.img
+              <img
                 src={room.image}
                 alt={room.title}
-                className="w-full h-64 object-cover transition duration-300 group-hover:scale-105"
-                whileHover={{ scale: 1.05 }}
+                className="w-full h-[280px] sm:h-[400px] object-cover transition-transform duration-700 group-hover:scale-110"
               />
-
-              {/* Title Overlay */}
-              <motion.div
-                className="absolute bottom-4 left-4 text-white bg-black/40 px-4 py-2 rounded"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isActive ? 0 : 1 }}
-              >
-                <h3 className="text-lg font-semibold">{room.title}</h3>
-              </motion.div>
-
-              {/* Expanded Section */}
-              <AnimatePresence>
-                {isActive && (
-                  <motion.div
-                    className="p-6"
-                    key="details"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <h3 className="text-xl font-bold text-gray-800">{room.title}</h3>
-                    <p className="text-sm text-gray-600 mt-2">{room.description}</p>
-                    <div className="mt-4 flex gap-3">
-                      <a
-                        href={`/rooms#room-${room.id}`}
-                        className="px-4 py-2 text-sm rounded-md bg-blue-600 text-white hover:bg-blue-700 transition"
-                      >
-                        View More
-                      </a>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate(`/rooms#room-${room.id}`);
-                        }}
-                        className="px-4 py-2 text-sm rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200"
-                      >
-                        More Details
-                      </button>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-40 transition duration-700" />
             </motion.div>
-          );
-        })}
-      </motion.div>
+
+            {/* Content Box */}
+            <motion.div
+              className="w-full lg:w-1/2 bg-white/90 backdrop-blur-lg border border-blue-100 p-10 rounded-3xl shadow-lg transition-all duration-500 hover:shadow-2xl relative overflow-hidden"
+              whileHover={{ y: -4 }}
+            >
+              {/* Glowing gradient shimmer ring */}
+              <div className="absolute -top-5 -right-5 w-36 h-36 bg-gradient-to-tr from-blue-500 to-pink-400 opacity-20 rounded-full blur-3xl animate-pulse" />
+              <motion.h3
+                className="text-2xl md:text-3xl font-bold text-gray-600 mb-6 cursor-default"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ color: "#1e2a54", scale: 1.03 }}
+              >
+                {room.title}
+              </motion.h3>
+              <motion.p
+                className="text-sm md:text-base text-gray-600 text-justify leading-relaxed"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 1 }}
+                viewport={{ once: true }}
+              >
+                {room.description}
+              </motion.p>
+              <div className="mt-8 flex flex-wrap gap-5">
+                <motion.a
+                  href={`/rooms#room-${room.id}`}
+                  className="px-6 py-3 bg-blue-600 text-white text-sm rounded-full shadow-md hover:bg-blue-700 transition relative overflow-hidden"
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="relative z-10">See More</span>
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-blue-700 opacity-0 group-hover:opacity-30 rounded-full transition duration-300"
+                  />
+                </motion.a>
+                <motion.button
+                  onClick={() => navigate(`/rooms#room-${room.id}`)}
+                  className="px-6 py-3 border border-gray-300 text-gray-800 text-sm rounded-full hover:bg-gray-100 transition relative overflow-hidden"
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Room Details
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        ))}
+      </div>
     </section>
   );
 };
