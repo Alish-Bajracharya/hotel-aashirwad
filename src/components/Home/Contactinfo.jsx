@@ -39,7 +39,7 @@ const contactDetails = [
 
 const ContactInfo = () => {
   return (
-    <section className="py-20 bg-white px-4 md:px-10">
+    <section className="py-20 bg-gradient-to-bl from-blue-200 to-white px-4 md:px-10">
       {/* Heading */}
       <motion.div
         className="text-center mb-12"

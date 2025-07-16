@@ -5,6 +5,7 @@ import Accommodation from "../components/Home/Accomodation";
 import OurServices from "../components/Home/OurServices";
 import Testimonials from "../components/Home/Testimonials";
 import ContactInfo from "../components/Home/Contactinfo";
+import Footer from "../components/Footer";
 
 
 const Home = () => {
@@ -17,6 +18,8 @@ const Home = () => {
       <OurServices />
       <Testimonials/>
       <ContactInfo/>
+      <Footer />
+     
     </div>
   );
 };

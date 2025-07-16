@@ -49,7 +49,7 @@ const Accomodation = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative bg-gradient-to-br from-white via-blue-50 to-white py-24">
+    <section className="relative bg-gradient-to-br from-white via-blue-200 to-white py-24">
       {/* Heading */}
       <motion.div
         className="text-center mb-20 px-6"
@@ -61,15 +61,16 @@ const Accomodation = () => {
         <h2 className="text-sm font-semibold text-[#1e2a54] tracking-widest uppercase">
           Experience Luxury
         </h2>
+        
         <motion.h1
-          className="text-4xl md:text-5xl font-bold text-[#1e2a54] mt-2 leading-snug relative inline-block cursor-pointer"
+          className="text-4xl md:text-5xl font-bold text-[#4792a0] mt-2 leading-snug relative inline-block cursor-pointer"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           whileHover={{ scale: 1.05 }}
         >
           Signature{" "}
-          <span className="text-blue-900 underline decoration-blue-400 decoration-4 underline-offset-8 transition-all duration-300 hover:decoration-blue-900">
+          <span className="text-blue-900 decoration-blue-400 decoration-4 underline-offset-8 transition-all duration-300 hover:decoration-blue-900">
             Accommodation
           </span>
         </motion.h1>
@@ -162,6 +163,25 @@ const Accomodation = () => {
           </motion.div>
         ))}
       </div>
+       {/* Animated Background Layer */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2 }}
+        className="absolute inset-0 -z-10 overflow-hidden"
+      >
+        {/* Floating Blur Elements */}
+        <motion.div
+          className="absolute w-[500px] h-[500px] bg-gradient-to-r from-blue-300 via-pink-300 to-yellow-200 opacity-20 blur-[120px] rounded-full top-[-100px] left-[-150px] animate-spin-slow"
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute w-[400px] h-[400px] bg-gradient-to-br from-[#1e2a54] via-purple-500 to-transparent opacity-10 blur-[100px] rounded-full bottom-[-50px] right-[-100px]"
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+        />
+      </motion.div>
     </section>
   );
 };
