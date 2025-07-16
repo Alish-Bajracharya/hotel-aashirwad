@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import Logo from "../assets/logo.jpg";
+import Logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,9 +73,9 @@ const Navbar = () => {
                 onMouseLeave={() => setHoveredMenu(null)}
               >
                 <span
-                  className={`hover:text-[#F59E0B] transition ${
-                    activeMenu === item.label ? "border-b-2 border-[#F59E0B]" : ""
-                  }`}
+                className={`hover:text-[#F59E0B] transition ${
+                  activeMenu === item.label ? "border-b-2 border-[#F59E0B]" : ""
+                }`}
                   onClick={() => setActiveMenu(item.label)}
                 >
                   {item.label}
@@ -83,15 +83,16 @@ const Navbar = () => {
                 {hoveredMenu === item.label && (
                   <ul className="absolute left-0 top-full mt-2 w-44 bg-white shadow-md border rounded-md z-20">
                     {item.submenu.map((sub) => (
-                      <li key={sub.label}>
-                        <a
-                          href={sub.href}
-                          className="block px-4 py-2 text-sm text-[#1e2a54] hover:bg-gray-100"
-                        >
-                          {sub.label}
-                        </a>
-                      </li>
-                    ))}
+                    <li key={sub.label}>
+                      <a
+                        href={sub.href}
+                        className="block px-4 py-2 text-sm text-[#1e2a54] hover:bg-gray-100"
+                        onClick={() => setActiveMenu(sub.label)} 
+                      >
+                        {sub.label}
+                      </a>
+                    </li>
+                  ))}
                   </ul>
                 )}
               </li>
@@ -137,30 +138,34 @@ const Navbar = () => {
                 <div key={item.label} className="w-full">
                   <p className="text-[#1e2a54] font-semibold">{item.label}</p>
                   <ul className="ml-4 mt-1 space-y-1">
-                    {item.submenu.map((sub) => (
-                      <li key={sub.label}>
-                        <a
-                          href={sub.href}
-                          className="block py-1 text-gray-600 hover:text-[#F59E0B]"
-                        >
-                          {sub.label}
-                        </a>
-                      </li>
-                    ))}
+                  {item.submenu.map((sub) => (
+                    <li key={sub.label}>
+                      <a
+                        href={sub.href}
+                        className="block py-1 text-gray-600 hover:text-[#F59E0B]"
+                        onClick={() => {
+                          setIsOpen(false);
+                          setActiveMenu(sub.label); 
+                        }}
+                      >
+                        {sub.label}
+                      </a>
+                    </li>
+                  ))}
                   </ul>
                 </div>
               ) : (
                 <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className="hover:text-[#F59E0B]"
-                    onClick={() => {
-                      setIsOpen(false);
-                      setActiveMenu(item.label);
-                    }}
-                  >
-                    {item.label}
-                  </a>
+                <a
+                  href={item.href}
+                  className="hover:text-[#F59E0B]"
+                  onClick={() => {
+                    setIsOpen(false);
+                    setActiveMenu(item.label); 
+                  }}
+                >
+                  {item.label}
+                </a>
                 </li>
               )
             )}

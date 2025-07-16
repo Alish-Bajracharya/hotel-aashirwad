@@ -1,4 +1,4 @@
-import { FaFacebookF, FaInstagram, FaWhatsapp, FaChevronUp } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaWhatsapp, FaChevronUp, FaMapMarkerAlt, FaPhone, FaEnvelope } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -64,16 +64,46 @@ const Footer = () => {
           </div>
 
           {/* Column 4 */}
-          <div>
+            <div>
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
-            <p className="text-sm text-gray-300">Lakeside, Pokhara 33700</p>
-            <p className="text-sm text-gray-300 mt-2">
-              <a href="tel:+9779800000000" className="hover:text-[#F59E0B] transition">+977 9800000000</a>
-            </p>
-            <p className="text-sm text-gray-300">
-              <a href="mailto:info@hotelaashirwad.com" className="hover:text-[#F59E0B] transition">info@hotelaashirwad.com</a>
-            </p>
-          </div>
+
+            <div className="flex items-start gap-3 text-sm text-gray-300 mb-3">
+                <FaMapMarkerAlt className="text-lg text-yellow-400 mt-1" />
+                <p>
+                Lakeside-6, Pokhara, Nepal
+                <a
+                    href="https://maps.app.goo.gl/i5jTx8u39LbES73a8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-yellow-400 underline block mt-1"
+                >
+                    View on Map
+                </a>
+                </p>
+            </div>
+
+            <div className="flex items-center gap-3 text-sm text-gray-300 mb-2">
+                <FaPhone className="text-lg text-yellow-400" />
+                <a href="tel:+9779800000000" className="hover:text-[#F59E0B] transition">
+                +977 9800000000
+                </a>
+            </div>
+
+            <div className="flex items-center gap-3 text-sm text-gray-300">
+                <FaEnvelope className="text-lg text-yellow-400" />
+                <a href="mailto:info@tophotelpokhara.com" className="hover:text-[#F59E0B] transition">
+                info@tophotelpokhara.com
+                </a>
+            </div>
+
+            {/* Optional CTA Button in Footer */}
+            <a
+                href="/contact"
+                className="inline-block mt-5 bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded-full text-sm shadow-md transition-all"
+            >
+                Contact Us
+            </a>
+            </div>
         </div>
 
         {/* Footer Bottom */}
