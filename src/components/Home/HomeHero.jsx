@@ -23,13 +23,13 @@ const HeroSection = () => {
     },
     {
       image:
-        "https://images.unsplash.com/photo-1600047500633-0143cdad85c0?auto=format&fit=crop&w=1950&q=80",
+        "https://assets-excellenttrek.b-cdn.net/wp-content/uploads/2017/03/paragliding-in-pokhara.jpg",
       title: "Elegant Rooms & Serene Views",
       subtitle: "Experience premium hospitality like never before",
     },
     {
       image:
-        "https://images.unsplash.com/photo-1551776235-dde6d4829808?auto=format&fit=crop&w=1950&q=80",
+        "https://dorjes.com/wp-content/themes/yootheme/cache/8f/Lakes-in-Pokhara-8fccb9bc.jpeg",
       title: "Unforgettable Stay",
       subtitle: "Book now and enjoy exclusive deals",
     },
